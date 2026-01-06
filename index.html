@@ -41,7 +41,7 @@
         }
 
         .home-header {
-            padding: 60px 20px 20px 20px;
+            padding: 20px 20px 20px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -207,7 +207,7 @@
         /* 신용정보 화면 */
         .light-header {
             background: #fff;
-            padding: 60px 20px 16px 20px;
+            padding: 20px 20px 16px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -696,6 +696,14 @@
         .card-amount {
             font-size: 16px;
             font-weight: 700;
+            text-align: right;
+        }
+
+        .card-amount-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
         }
 
         .expand-btn {
@@ -704,6 +712,15 @@
             font-size: 20px;
             color: #999;
             cursor: pointer;
+        }
+
+        .expand-btn-inline {
+            background: none;
+            border: none;
+            font-size: 18px;
+            color: #d0d0d0;
+            cursor: pointer;
+            padding: 0;
         }
 
         .empty-state {
@@ -1043,15 +1060,31 @@
             <div class="detail-amount">4,706,000원</div>
             <div class="chart-container">
                 <div class="chart-label">4,706,000원</div>
-                <svg class="chart-svg" viewBox="0 0 350 180">
-                    <polyline fill="none" stroke="#00c853" stroke-width="3" stroke-dasharray="5,5" points="20,100 80,120 140,60 200,80 260,50 320,20"/>
-                    <circle cx="320" cy="20" r="8" fill="#00c853" stroke="#fff" stroke-width="2"/>
-                    <text x="20" y="200" text-anchor="middle" font-size="12" fill="#999">6</text>
-                    <text x="80" y="200" text-anchor="middle" font-size="12" fill="#999">7</text>
-                    <text x="140" y="200" text-anchor="middle" font-size="12" fill="#999">8</text>
-                    <text x="200" y="200" text-anchor="middle" font-size="12" fill="#999">9</text>
-                    <text x="260" y="200" text-anchor="middle" font-size="12" fill="#999">10</text>
-                    <text x="320" y="200" text-anchor="middle" font-size="12" fill="#999">11월</text>
+                <svg class="chart-svg" viewBox="0 0 400 200">
+                    <!-- 배경 격자선 -->
+                    <line x1="0" y1="140" x2="400" y2="140" stroke="#f0f0f0" stroke-width="1"/>
+                    
+                    <!-- 차트 라인 -->
+                    <polyline 
+                        fill="none" 
+                        stroke="#00c853" 
+                        stroke-width="3" 
+                        stroke-dasharray="8,5" 
+                        points="30,80 100,110 170,45 240,60 310,35 380,15"
+                    />
+                    
+                    <!-- 포인트들 -->
+                    <circle cx="30" cy="80" r="5" fill="#00c853"/>
+                    <circle cx="240" cy="60" r="5" fill="#00c853"/>
+                    <circle cx="380" cy="15" r="9" fill="#00c853" stroke="#fff" stroke-width="3"/>
+                    
+                    <!-- X축 레이블 -->
+                    <text x="30" y="170" text-anchor="middle" font-size="14" fill="#999">6</text>
+                    <text x="100" y="170" text-anchor="middle" font-size="14" fill="#999">7</text>
+                    <text x="170" y="170" text-anchor="middle" font-size="14" fill="#999">8</text>
+                    <text x="240" y="170" text-anchor="middle" font-size="14" fill="#999">9</text>
+                    <text x="310" y="170" text-anchor="middle" font-size="14" fill="#999">10</text>
+                    <text x="380" y="170" text-anchor="middle" font-size="14" fill="#999" font-weight="600">11월</text>
                 </svg>
             </div>
             <div class="chart-info">15일 이전은 전전월말 / 15일 이후는 전월말 기준</div>
@@ -1065,17 +1098,21 @@
                     <div class="card-name">신한카드</div>
                     <div class="card-type">체크</div>
                 </div>
-                <div class="card-amount">0원</div>
-                <button class="expand-btn">∨</button>
+                <div class="card-amount-wrapper">
+                    <div class="card-amount">0원</div>
+                    <button class="expand-btn-inline">∨</button>
+                </div>
             </div>
             <div class="card-item">
-                <div class="card-icon" style="background: #ffd700; color: #333;">★</div>
+                <div class="card-icon" style="background: #6b5b00; color: #fff;">★</div>
                 <div class="card-info">
                     <div class="card-name">KB국민카드</div>
                     <div class="card-type">신용</div>
                 </div>
-                <div class="card-amount">5,000원</div>
-                <button class="expand-btn">∨</button>
+                <div class="card-amount-wrapper">
+                    <div class="card-amount">5,000원</div>
+                    <button class="expand-btn-inline">∨</button>
+                </div>
             </div>
             <div class="card-item">
                 <div class="card-icon" style="background: #00a8ff; color: #fff;">🌊</div>
@@ -1083,8 +1120,10 @@
                     <div class="card-name">우리카드</div>
                     <div class="card-type">신용</div>
                 </div>
-                <div class="card-amount">2,064,000원</div>
-                <button class="expand-btn">∨</button>
+                <div class="card-amount-wrapper">
+                    <div class="card-amount">2,064,000원</div>
+                    <button class="expand-btn-inline">∨</button>
+                </div>
             </div>
             <div class="card-item">
                 <div class="card-icon" style="background: #000; color: #fff;">H</div>
@@ -1092,9 +1131,59 @@
                     <div class="card-name">현대카드</div>
                     <div class="card-type">신용</div>
                 </div>
-                <div class="card-amount">2,608,000원</div>
-                <button class="expand-btn">∨</button>
+                <div class="card-amount-wrapper">
+                    <div class="card-amount">2,608,000원</div>
+                    <button class="expand-btn-inline">∨</button>
+                </div>
             </div>
+            <div class="card-item">
+                <div class="card-icon" style="background: #6b5b00; color: #fff;">★</div>
+                <div class="card-info">
+                    <div class="card-name">KB국민카드</div>
+                    <div class="card-type">체크</div>
+                </div>
+                <div class="card-amount-wrapper">
+                    <div class="card-amount">0원</div>
+                    <button class="expand-btn-inline">∨</button>
+                </div>
+            </div>
+            <div class="card-item">
+                <div class="card-icon" style="background: #ffd900; color: #333;">B</div>
+                <div class="card-info">
+                    <div class="card-name">카카오뱅크(카드)</div>
+                    <div class="card-type">체크</div>
+                </div>
+                <div class="card-amount-wrapper">
+                    <div class="card-amount">29,000원</div>
+                    <button class="expand-btn-inline">∨</button>
+                </div>
+            </div>
+            <div class="card-item">
+                <div class="card-icon" style="background: #00a8ff; color: #fff;">🌊</div>
+                <div class="card-info">
+                    <div class="card-name">우리카드</div>
+                    <div class="card-type">체크</div>
+                </div>
+                <div class="card-amount-wrapper">
+                    <div class="card-amount">0원</div>
+                    <button class="expand-btn-inline">∨</button>
+                </div>
+            </div>
+            <div class="card-item">
+                <div class="card-icon" style="background: #00a859; color: #fff;">🏦</div>
+                <div class="card-info">
+                    <div class="card-name">농협은행(카드)</div>
+                    <div class="card-type">체크</div>
+                </div>
+                <div class="card-amount-wrapper">
+                    <div class="card-amount">0원</div>
+                    <button class="expand-btn-inline">∨</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="disclaimer">
+            위 정보는 코리아크레딧뷰로(KCB)에서 제공하며, KCB 데이터 산정일 및 기준 금액의 차이로 실제 금융정보와 다를 수 있습니다.
         </div>
     </div>
 
