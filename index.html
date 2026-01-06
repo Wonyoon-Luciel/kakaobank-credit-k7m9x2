@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="default">
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23FFD900' width='100' height='100' rx='20'/><text x='50' y='70' text-anchor='middle' font-size='60' font-weight='bold'>B</text></svg>">
     <title>카카오뱅크</title>
     <style>
         * {
@@ -21,7 +20,6 @@
             overflow-x: hidden;
             max-width: 430px;
             margin: 0 auto;
-            position: relative;
             min-height: 100vh;
         }
 
@@ -37,11 +35,10 @@
         /* 홈 화면 */
         .home-page {
             background: #fff;
-            color: #000;
         }
 
         .home-header {
-            padding: 20px 20px 20px 20px;
+            padding: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -50,7 +47,6 @@
         .home-title {
             font-size: 28px;
             font-weight: 700;
-            color: #000;
         }
 
         .home-actions {
@@ -113,7 +109,6 @@
 
         .menu-label {
             font-size: 13px;
-            color: #000;
         }
 
         .ad-banner {
@@ -139,7 +134,6 @@
         .ad-text {
             flex: 1;
             font-size: 14px;
-            color: #333;
         }
 
         .ad-label {
@@ -207,7 +201,7 @@
         /* 신용정보 화면 */
         .light-header {
             background: #fff;
-            padding: 20px 20px 16px 20px;
+            padding: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -658,12 +652,18 @@
             margin-bottom: 12px;
         }
 
+        /* 카드 아이템 */
         .card-item {
             background: #fff;
             padding: 16px;
             border-radius: 12px;
             margin-bottom: 12px;
             cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .card-item:active {
+            background: #f9f9f9;
         }
 
         .card-item-header {
@@ -698,12 +698,6 @@
             color: #999;
         }
 
-        .card-amount {
-            font-size: 16px;
-            font-weight: 700;
-            text-align: right;
-        }
-
         .card-amount-wrapper {
             display: flex;
             flex-direction: column;
@@ -711,12 +705,10 @@
             gap: 6px;
         }
 
-        .expand-btn {
-            background: none;
-            border: none;
-            font-size: 20px;
-            color: #999;
-            cursor: pointer;
+        .card-amount {
+            font-size: 16px;
+            font-weight: 700;
+            text-align: right;
         }
 
         .expand-btn-inline {
@@ -739,26 +731,16 @@
         }
 
         .card-detail {
-            display: none;
-            margin-top: 16px;
-            padding-top: 16px;
-            border-top: 1px solid #f0f0f0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
         }
 
         .card-detail.show {
-            display: block;
-            animation: slideDown 0.3s ease;
-        }
-
-        @keyframes slideDown {
-            from {
-                opacity: 0;
-                max-height: 0;
-            }
-            to {
-                opacity: 1;
-                max-height: 500px;
-            }
+            max-height: 600px;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #f0f0f0;
         }
 
         .detail-row {
@@ -1116,24 +1098,11 @@
             <div class="chart-container">
                 <div class="chart-label">4,706,000원</div>
                 <svg class="chart-svg" viewBox="0 0 400 200">
-                    <!-- 배경 격자선 -->
                     <line x1="0" y1="140" x2="400" y2="140" stroke="#f0f0f0" stroke-width="1"/>
-                    
-                    <!-- 차트 라인 -->
-                    <polyline 
-                        fill="none" 
-                        stroke="#00c853" 
-                        stroke-width="3" 
-                        stroke-dasharray="8,5" 
-                        points="30,80 100,110 170,45 240,60 310,35 380,15"
-                    />
-                    
-                    <!-- 포인트들 -->
+                    <polyline fill="none" stroke="#00c853" stroke-width="3" stroke-dasharray="8,5" points="30,80 100,110 170,45 240,60 310,35 380,15"/>
                     <circle cx="30" cy="80" r="5" fill="#00c853"/>
                     <circle cx="240" cy="60" r="5" fill="#00c853"/>
                     <circle cx="380" cy="15" r="9" fill="#00c853" stroke="#fff" stroke-width="3"/>
-                    
-                    <!-- X축 레이블 -->
                     <text x="30" y="170" text-anchor="middle" font-size="14" fill="#999">6</text>
                     <text x="100" y="170" text-anchor="middle" font-size="14" fill="#999">7</text>
                     <text x="170" y="170" text-anchor="middle" font-size="14" fill="#999">8</text>
@@ -1149,7 +1118,7 @@
             <div class="list-title">카드 총 8개</div>
             
             <!-- 신한카드 -->
-            <div class="card-item" onclick="toggleCard(this)">
+            <div class="card-item" onclick="toggleCard(event, this)">
                 <div class="card-item-header">
                     <div class="card-icon" style="background: #5b4fff; color: #fff;">$</div>
                     <div class="card-info">
@@ -1202,7 +1171,7 @@
             </div>
 
             <!-- KB국민카드 -->
-            <div class="card-item" onclick="toggleCard(this)">
+            <div class="card-item" onclick="toggleCard(event, this)">
                 <div class="card-item-header">
                     <div class="card-icon" style="background: #6b5b00; color: #fff;">★</div>
                     <div class="card-info">
@@ -1211,7 +1180,7 @@
                     </div>
                     <div class="card-amount-wrapper">
                         <div class="card-amount">5,000원</div>
-                        <button class="expand-btn-inline" ∨</button>
+                        <button class="expand-btn-inline">∨</button>
                     </div>
                 </div>
                 <div class="card-detail">
@@ -1255,7 +1224,7 @@
             </div>
 
             <!-- 우리카드 -->
-            <div class="card-item" onclick="toggleCard(this)">
+            <div class="card-item" onclick="toggleCard(event, this)">
                 <div class="card-item-header">
                     <div class="card-icon" style="background: #00a8ff; color: #fff;">🌊</div>
                     <div class="card-info">
@@ -1264,7 +1233,7 @@
                     </div>
                     <div class="card-amount-wrapper">
                         <div class="card-amount">2,064,000원</div>
-                        <button class="expand-btn-inline" ∨</button>
+                        <button class="expand-btn-inline">∨</button>
                     </div>
                 </div>
                 <div class="card-detail">
@@ -1308,7 +1277,7 @@
             </div>
 
             <!-- 현대카드 -->
-            <div class="card-item" onclick="toggleCard(this)">
+            <div class="card-item" onclick="toggleCard(event, this)">
                 <div class="card-item-header">
                     <div class="card-icon" style="background: #000; color: #fff;">H</div>
                     <div class="card-info">
@@ -1317,7 +1286,7 @@
                     </div>
                     <div class="card-amount-wrapper">
                         <div class="card-amount">2,608,000원</div>
-                        <button class="expand-btn-inline" ∨</button>
+                        <button class="expand-btn-inline">∨</button>
                     </div>
                 </div>
                 <div class="card-detail">
@@ -1361,7 +1330,7 @@
             </div>
 
             <!-- KB국민카드 (체크) -->
-            <div class="card-item" onclick="toggleCard(this)">
+            <div class="card-item" onclick="toggleCard(event, this)">
                 <div class="card-item-header">
                     <div class="card-icon" style="background: #6b5b00; color: #fff;">★</div>
                     <div class="card-info">
@@ -1370,7 +1339,7 @@
                     </div>
                     <div class="card-amount-wrapper">
                         <div class="card-amount">0원</div>
-                        <button class="expand-btn-inline" ∨</button>
+                        <button class="expand-btn-inline">∨</button>
                     </div>
                 </div>
                 <div class="card-detail">
@@ -1414,7 +1383,7 @@
             </div>
 
             <!-- 카카오뱅크(카드) -->
-            <div class="card-item" onclick="toggleCard(this)">
+            <div class="card-item" onclick="toggleCard(event, this)">
                 <div class="card-item-header">
                     <div class="card-icon" style="background: #ffd900; color: #333;">B</div>
                     <div class="card-info">
@@ -1423,7 +1392,7 @@
                     </div>
                     <div class="card-amount-wrapper">
                         <div class="card-amount">29,000원</div>
-                        <button class="expand-btn-inline" ∨</button>
+                        <button class="expand-btn-inline">∨</button>
                     </div>
                 </div>
                 <div class="card-detail">
@@ -1467,7 +1436,7 @@
             </div>
 
             <!-- 우리카드 (체크) -->
-            <div class="card-item" onclick="toggleCard(this)">
+            <div class="card-item" onclick="toggleCard(event, this)">
                 <div class="card-item-header">
                     <div class="card-icon" style="background: #00a8ff; color: #fff;">🌊</div>
                     <div class="card-info">
@@ -1476,7 +1445,7 @@
                     </div>
                     <div class="card-amount-wrapper">
                         <div class="card-amount">0원</div>
-                        <button class="expand-btn-inline" ∨</button>
+                        <button class="expand-btn-inline">∨</button>
                     </div>
                 </div>
                 <div class="card-detail">
@@ -1520,7 +1489,7 @@
             </div>
 
             <!-- 농협은행(카드) -->
-            <div class="card-item" onclick="toggleCard(this)">
+            <div class="card-item" onclick="toggleCard(event, this)">
                 <div class="card-item-header">
                     <div class="card-icon" style="background: #00a859; color: #fff;">🏦</div>
                     <div class="card-info">
@@ -1529,7 +1498,7 @@
                     </div>
                     <div class="card-amount-wrapper">
                         <div class="card-amount">0원</div>
-                        <button class="expand-btn-inline" ∨</button>
+                        <button class="expand-btn-inline">∨</button>
                     </div>
                 </div>
                 <div class="card-detail">
@@ -1612,13 +1581,17 @@
         <div class="list-section">
             <div class="list-title">대출 총 1건</div>
             <div class="card-item">
-                <div class="card-icon" style="background: #ffd900; color: #333;">B</div>
-                <div class="card-info">
-                    <div class="card-name">카카오뱅크</div>
-                    <div class="card-type">제1금융권</div>
+                <div class="card-item-header">
+                    <div class="card-icon" style="background: #ffd900; color: #333;">B</div>
+                    <div class="card-info">
+                        <div class="card-name">카카오뱅크</div>
+                        <div class="card-type">제1금융권</div>
+                    </div>
+                    <div class="card-amount-wrapper">
+                        <div class="card-amount">2,967,000원</div>
+                        <button class="expand-btn-inline">∨</button>
+                    </div>
                 </div>
-                <div class="card-amount">2,967,000원</div>
-                <button class="expand-btn">∨</button>
             </div>
         </div>
 
@@ -1644,7 +1617,7 @@
                     <div class="loan-ad-rate">9.0~16.0%</div>
                     <div class="loan-ad-limit">최대 한도 3,000만원</div>
                 </div>
-                <button class="expand-btn">›</button>
+                <button class="expand-btn-inline">›</button>
             </div>
         </div>
     </div>
@@ -1728,15 +1701,15 @@
             }
         }
 
-        function toggleCard(cardElement) {
+        function toggleCard(event, cardElement) {
             const detail = cardElement.querySelector('.card-detail');
             const button = cardElement.querySelector('.expand-btn-inline');
             
             // 다른 모든 카드 닫기
             document.querySelectorAll('.card-item').forEach(item => {
                 if (item !== cardElement) {
-                    item.querySelector('.card-detail').classList.remove('show');
-                    item.querySelector('.expand-btn-inline').classList.remove('expanded');
+                    item.querySelector('.card-detail')?.classList.remove('show');
+                    item.querySelector('.expand-btn-inline')?.classList.remove('expanded');
                 }
             });
             
