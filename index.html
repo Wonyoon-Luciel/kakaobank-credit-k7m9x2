@@ -673,21 +673,26 @@
         }
 
         .card-icon {
-            width: 35px;
-            height: 35px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
+            overflow: hidden;
+            background: #fff;
+            border: 1px solid #e6e6e6;
+            
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 24px;
             flex-shrink: 0;
-            overflow: hidden;
         }
+
         .card-icon img {
-            width: 28px;
-            height: 28px;
+            width: 22px;   
+            height: 22px;
             object-fit: contain;
+            display: block;
         }
+
 
         .card-info {
             flex: 1;
@@ -1457,7 +1462,7 @@
             <div class="card-item" onclick="toggleCard(event, this)">
                 <div class="card-item-header">
                     <div class="card-icon">
-                        <img src="icons/nh.png" alt="농협은행">
+                        <img src="icons/woori.png" alt="우리카드">
                     </div>
                     <div class="card-info">
                         <div class="card-name">우리카드</div>
@@ -1512,7 +1517,7 @@
             <div class="card-item" onclick="toggleCard(event, this)">
                 <div class="card-item-header">
                     <div class="card-icon">
-                        <img src="icons/shinhan.png" alt="농협은행">
+                        <img src="icons/nh.png" alt="농협은행">
                     </div>
                     <div class="card-info">
                         <div class="card-name">농협은행(카드)</div>
