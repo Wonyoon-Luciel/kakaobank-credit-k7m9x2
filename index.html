@@ -663,6 +663,10 @@
             padding: 16px;
             border-radius: 12px;
             margin-bottom: 12px;
+            cursor: pointer;
+        }
+
+        .card-item-header {
             display: flex;
             align-items: center;
             gap: 12px;
@@ -676,6 +680,7 @@
             align-items: center;
             justify-content: center;
             font-size: 24px;
+            flex-shrink: 0;
         }
 
         .card-info {
@@ -703,7 +708,7 @@
             display: flex;
             flex-direction: column;
             align-items: flex-end;
-            gap: 4px;
+            gap: 6px;
         }
 
         .expand-btn {
@@ -715,12 +720,62 @@
         }
 
         .expand-btn-inline {
-            background: none;
-            border: none;
-            font-size: 18px;
-            color: #d0d0d0;
+            background: #f5f5f5;
+            border: 1px solid #e0e0e0;
+            width: 28px;
+            height: 28px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-size: 14px;
+            color: #999;
             cursor: pointer;
-            padding: 0;
+            transition: transform 0.3s ease;
+        }
+
+        .expand-btn-inline.expanded {
+            transform: rotate(180deg);
+        }
+
+        .card-detail {
+            display: none;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .card-detail.show {
+            display: block;
+            animation: slideDown 0.3s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                opacity: 0;
+                max-height: 0;
+            }
+            to {
+                opacity: 1;
+                max-height: 500px;
+            }
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 8px 0;
+            font-size: 14px;
+        }
+
+        .detail-label {
+            color: #666;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: #333;
+            text-align: right;
         }
 
         .empty-state {
@@ -1092,92 +1147,428 @@
 
         <div class="list-section">
             <div class="list-title">카드 총 8개</div>
-            <div class="card-item">
-                <div class="card-icon" style="background: #5b4fff; color: #fff;">$</div>
-                <div class="card-info">
-                    <div class="card-name">신한카드</div>
-                    <div class="card-type">체크</div>
+            
+            <!-- 신한카드 -->
+            <div class="card-item" onclick="toggleCard(this)">
+                <div class="card-item-header">
+                    <div class="card-icon" style="background: #5b4fff; color: #fff;">$</div>
+                    <div class="card-info">
+                        <div class="card-name">신한카드</div>
+                        <div class="card-type">체크</div>
+                    </div>
+                    <div class="card-amount-wrapper">
+                        <div class="card-amount">0원</div>
+                        <button class="expand-btn-inline" onclick="event.stopPropagation()">∨</button>
+                    </div>
                 </div>
-                <div class="card-amount-wrapper">
-                    <div class="card-amount">0원</div>
-                    <button class="expand-btn-inline">∨</button>
-                </div>
-            </div>
-            <div class="card-item">
-                <div class="card-icon" style="background: #6b5b00; color: #fff;">★</div>
-                <div class="card-info">
-                    <div class="card-name">KB국민카드</div>
-                    <div class="card-type">신용</div>
-                </div>
-                <div class="card-amount-wrapper">
-                    <div class="card-amount">5,000원</div>
-                    <button class="expand-btn-inline">∨</button>
-                </div>
-            </div>
-            <div class="card-item">
-                <div class="card-icon" style="background: #00a8ff; color: #fff;">🌊</div>
-                <div class="card-info">
-                    <div class="card-name">우리카드</div>
-                    <div class="card-type">신용</div>
-                </div>
-                <div class="card-amount-wrapper">
-                    <div class="card-amount">2,064,000원</div>
-                    <button class="expand-btn-inline">∨</button>
-                </div>
-            </div>
-            <div class="card-item">
-                <div class="card-icon" style="background: #000; color: #fff;">H</div>
-                <div class="card-info">
-                    <div class="card-name">현대카드</div>
-                    <div class="card-type">신용</div>
-                </div>
-                <div class="card-amount-wrapper">
-                    <div class="card-amount">2,608,000원</div>
-                    <button class="expand-btn-inline">∨</button>
-                </div>
-            </div>
-            <div class="card-item">
-                <div class="card-icon" style="background: #6b5b00; color: #fff;">★</div>
-                <div class="card-info">
-                    <div class="card-name">KB국민카드</div>
-                    <div class="card-type">체크</div>
-                </div>
-                <div class="card-amount-wrapper">
-                    <div class="card-amount">0원</div>
-                    <button class="expand-btn-inline">∨</button>
+                <div class="card-detail">
+                    <div class="detail-row">
+                        <span class="detail-label">개설일</span>
+                        <span class="detail-value">2025.09.05</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">신용 일시불 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">신용 할부 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">현금서비스 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">체크카드 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">연체금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">총 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">총 한도</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">현금서비스 한도</span>
+                        <span class="detail-value">0원</span>
+                    </div>
                 </div>
             </div>
-            <div class="card-item">
-                <div class="card-icon" style="background: #ffd900; color: #333;">B</div>
-                <div class="card-info">
-                    <div class="card-name">카카오뱅크(카드)</div>
-                    <div class="card-type">체크</div>
+
+            <!-- KB국민카드 -->
+            <div class="card-item" onclick="toggleCard(this)">
+                <div class="card-item-header">
+                    <div class="card-icon" style="background: #6b5b00; color: #fff;">★</div>
+                    <div class="card-info">
+                        <div class="card-name">KB국민카드</div>
+                        <div class="card-type">신용</div>
+                    </div>
+                    <div class="card-amount-wrapper">
+                        <div class="card-amount">5,000원</div>
+                        <button class="expand-btn-inline" onclick="event.stopPropagation()">∨</button>
+                    </div>
                 </div>
-                <div class="card-amount-wrapper">
-                    <div class="card-amount">29,000원</div>
-                    <button class="expand-btn-inline">∨</button>
+                <div class="card-detail">
+                    <div class="detail-row">
+                        <span class="detail-label">개설일</span>
+                        <span class="detail-value">2022.12.12</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">신용 일시불 이용금액</span>
+                        <span class="detail-value">5,000원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">신용 할부 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">현금서비스 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">체크카드 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">연체금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">총 이용금액</span>
+                        <span class="detail-value">5,000원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">총 한도</span>
+                        <span class="detail-value">2,500,000원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">현금서비스 한도</span>
+                        <span class="detail-value">500,000원</span>
+                    </div>
                 </div>
             </div>
-            <div class="card-item">
-                <div class="card-icon" style="background: #00a8ff; color: #fff;">🌊</div>
-                <div class="card-info">
-                    <div class="card-name">우리카드</div>
-                    <div class="card-type">체크</div>
+
+            <!-- 우리카드 -->
+            <div class="card-item" onclick="toggleCard(this)">
+                <div class="card-item-header">
+                    <div class="card-icon" style="background: #00a8ff; color: #fff;">🌊</div>
+                    <div class="card-info">
+                        <div class="card-name">우리카드</div>
+                        <div class="card-type">신용</div>
+                    </div>
+                    <div class="card-amount-wrapper">
+                        <div class="card-amount">2,064,000원</div>
+                        <button class="expand-btn-inline" onclick="event.stopPropagation()">∨</button>
+                    </div>
                 </div>
-                <div class="card-amount-wrapper">
-                    <div class="card-amount">0원</div>
-                    <button class="expand-btn-inline">∨</button>
+                <div class="card-detail">
+                    <div class="detail-row">
+                        <span class="detail-label">개설일</span>
+                        <span class="detail-value">2022.10.08</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">신용 일시불 이용금액</span>
+                        <span class="detail-value">1,714,000원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">신용 할부 이용금액</span>
+                        <span class="detail-value">350,000원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">현금서비스 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">체크카드 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">연체금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">총 이용금액</span>
+                        <span class="detail-value">2,064,000원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">총 한도</span>
+                        <span class="detail-value">3,000,000원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">현금서비스 한도</span>
+                        <span class="detail-value">600,000원</span>
+                    </div>
                 </div>
             </div>
-            <div class="card-item">
-                <div class="card-icon" style="background: #00a859; color: #fff;">🏦</div>
-                <div class="card-info">
-                    <div class="card-name">농협은행(카드)</div>
-                    <div class="card-type">체크</div>
+
+            <!-- 현대카드 -->
+            <div class="card-item" onclick="toggleCard(this)">
+                <div class="card-item-header">
+                    <div class="card-icon" style="background: #000; color: #fff;">H</div>
+                    <div class="card-info">
+                        <div class="card-name">현대카드</div>
+                        <div class="card-type">신용</div>
+                    </div>
+                    <div class="card-amount-wrapper">
+                        <div class="card-amount">2,608,000원</div>
+                        <button class="expand-btn-inline" onclick="event.stopPropagation()">∨</button>
+                    </div>
                 </div>
-                <div class="card-amount-wrapper">
-                    <div class="card-amount">0원</div>
-                    <button class="expand-btn-inline">∨</button>
+                <div class="card-detail">
+                    <div class="detail-row">
+                        <span class="detail-label">개설일</span>
+                        <span class="detail-value">2021.09.23</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">신용 일시불 이용금액</span>
+                        <span class="detail-value">628,000원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">신용 할부 이용금액</span>
+                        <span class="detail-value">1,980,000원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">현금서비스 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">체크카드 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">연체금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">총 이용금액</span>
+                        <span class="detail-value">2,608,000원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">총 한도</span>
+                        <span class="detail-value">7,000,000원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">현금서비스 한도</span>
+                        <span class="detail-value">1,700,000원</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- KB국민카드 (체크) -->
+            <div class="card-item" onclick="toggleCard(this)">
+                <div class="card-item-header">
+                    <div class="card-icon" style="background: #6b5b00; color: #fff;">★</div>
+                    <div class="card-info">
+                        <div class="card-name">KB국민카드</div>
+                        <div class="card-type">체크</div>
+                    </div>
+                    <div class="card-amount-wrapper">
+                        <div class="card-amount">0원</div>
+                        <button class="expand-btn-inline" onclick="event.stopPropagation()">∨</button>
+                    </div>
+                </div>
+                <div class="card-detail">
+                    <div class="detail-row">
+                        <span class="detail-label">개설일</span>
+                        <span class="detail-value">2021.04.16</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">신용 일시불 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">신용 할부 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">현금서비스 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">체크카드 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">연체금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">총 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">총 한도</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">현금서비스 한도</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 카카오뱅크(카드) -->
+            <div class="card-item" onclick="toggleCard(this)">
+                <div class="card-item-header">
+                    <div class="card-icon" style="background: #ffd900; color: #333;">B</div>
+                    <div class="card-info">
+                        <div class="card-name">카카오뱅크(카드)</div>
+                        <div class="card-type">체크</div>
+                    </div>
+                    <div class="card-amount-wrapper">
+                        <div class="card-amount">29,000원</div>
+                        <button class="expand-btn-inline" onclick="event.stopPropagation()">∨</button>
+                    </div>
+                </div>
+                <div class="card-detail">
+                    <div class="detail-row">
+                        <span class="detail-label">개설일</span>
+                        <span class="detail-value">2019.01.30</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">신용 일시불 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">신용 할부 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">현금서비스 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">체크카드 이용금액</span>
+                        <span class="detail-value">29,000원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">연체금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">총 이용금액</span>
+                        <span class="detail-value">29,000원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">총 한도</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">현금서비스 한도</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 우리카드 (체크) -->
+            <div class="card-item" onclick="toggleCard(this)">
+                <div class="card-item-header">
+                    <div class="card-icon" style="background: #00a8ff; color: #fff;">🌊</div>
+                    <div class="card-info">
+                        <div class="card-name">우리카드</div>
+                        <div class="card-type">체크</div>
+                    </div>
+                    <div class="card-amount-wrapper">
+                        <div class="card-amount">0원</div>
+                        <button class="expand-btn-inline" onclick="event.stopPropagation()">∨</button>
+                    </div>
+                </div>
+                <div class="card-detail">
+                    <div class="detail-row">
+                        <span class="detail-label">개설일</span>
+                        <span class="detail-value">2016.03.29</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">신용 일시불 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">신용 할부 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">현금서비스 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">체크카드 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">연체금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">총 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">총 한도</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">현금서비스 한도</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 농협은행(카드) -->
+            <div class="card-item" onclick="toggleCard(this)">
+                <div class="card-item-header">
+                    <div class="card-icon" style="background: #00a859; color: #fff;">🏦</div>
+                    <div class="card-info">
+                        <div class="card-name">농협은행(카드)</div>
+                        <div class="card-type">체크</div>
+                    </div>
+                    <div class="card-amount-wrapper">
+                        <div class="card-amount">0원</div>
+                        <button class="expand-btn-inline" onclick="event.stopPropagation()">∨</button>
+                    </div>
+                </div>
+                <div class="card-detail">
+                    <div class="detail-row">
+                        <span class="detail-label">개설일</span>
+                        <span class="detail-value">2015.06.08</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">신용 일시불 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">신용 할부 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">현금서비스 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">체크카드 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">연체금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">총 이용금액</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">총 한도</span>
+                        <span class="detail-value">0원</span>
+                    </div>
+                    <div class="detail-row">
+                        <span class="detail-label">현금서비스 한도</span>
+                        <span class="detail-value">0원</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -1337,6 +1728,23 @@
             }
         }
 
+        function toggleCard(cardElement) {
+            const detail = cardElement.querySelector('.card-detail');
+            const button = cardElement.querySelector('.expand-btn-inline');
+            
+            // 다른 모든 카드 닫기
+            document.querySelectorAll('.card-item').forEach(item => {
+                if (item !== cardElement) {
+                    item.querySelector('.card-detail').classList.remove('show');
+                    item.querySelector('.expand-btn-inline').classList.remove('expanded');
+                }
+            });
+            
+            // 현재 카드 토글
+            detail.classList.toggle('show');
+            button.classList.toggle('expanded');
+        }
+
         window.addEventListener('hashchange', () => {
             showPage(window.location.hash.slice(1) || 'home');
         });
@@ -1345,7 +1753,7 @@
             showPage(window.location.hash.slice(1) || 'home');
         });
 
-        document.querySelectorAll('.menu-item, .usage-item, .card-item, .tab').forEach(el => {
+        document.querySelectorAll('.menu-item, .usage-item, .tab').forEach(el => {
             el.addEventListener('touchstart', () => el.style.opacity = '0.6');
             el.addEventListener('touchend', () => el.style.opacity = '1');
         });
