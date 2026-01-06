@@ -407,6 +407,175 @@
             gap: 8px;
         }
 
+        /* 신용리포트 섹션 */
+        .credit-report-section {
+            margin: 40px 20px 20px;
+        }
+
+        .report-card {
+            background: #fff;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .report-items {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px;
+            margin-bottom: 20px;
+        }
+
+        .report-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .report-emoji {
+            font-size: 32px;
+            margin-bottom: 8px;
+        }
+
+        .report-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+
+        .report-status {
+            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .status-good {
+            background: #e8f5e9;
+            color: #2e7d32;
+        }
+
+        .detail-btn {
+            width: 100%;
+            padding: 14px;
+            background: #f5f5f5;
+            border: none;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+            cursor: pointer;
+        }
+
+        .info-banner {
+            background: #fff;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            cursor: pointer;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .info-icon {
+            font-size: 24px;
+        }
+
+        .info-text {
+            flex: 1;
+            font-size: 14px;
+            color: #333;
+            font-weight: 500;
+        }
+
+        /* 대출 추천 섹션 */
+        .loan-recommend-section {
+            background: linear-gradient(135deg, #ffe0b2 0%, #ffccbc 100%);
+            margin: 20px 20px 40px;
+            padding: 20px;
+            border-radius: 16px;
+        }
+
+        .recommend-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .recommend-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .ad-badge-small {
+            background: rgba(255, 255, 255, 0.7);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-size: 10px;
+            color: #999;
+        }
+
+        .recommend-subtitle {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 16px;
+        }
+
+        .recommend-card {
+            background: #fff;
+            padding: 16px;
+            border-radius: 12px;
+            display: flex;
+            gap: 16px;
+        }
+
+        .recommend-bank-icon {
+            width: 56px;
+            height: 56px;
+            background: #fff;
+            border: 2px solid #e0e0e0;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .recommend-info {
+            flex: 1;
+        }
+
+        .recommend-bank {
+            font-size: 16px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .recommend-product {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .recommend-rate {
+            font-size: 15px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 2px;
+        }
+
+        .recommend-limit {
+            font-size: 13px;
+            color: #666;
+        }
+
         /* 상세 화면 */
         .tab-bar {
             display: flex;
@@ -791,6 +960,66 @@
             <div class="usage-item" onclick="navigateTo('loan')">
                 <span class="usage-label">대출</span>
                 <span class="usage-value">2,967,000원 <span style="color: #ccc;">›</span></span>
+            </div>
+        </div>
+
+        <div class="credit-report-section">
+            <div class="section-title">내 신용리포트</div>
+            
+            <div class="report-card">
+                <div class="report-items">
+                    <div class="report-item">
+                        <div class="report-emoji">😊</div>
+                        <div class="report-label">거래기간</div>
+                        <div class="report-status status-good">안정</div>
+                    </div>
+                    <div class="report-item">
+                        <div class="report-emoji">😊🎉</div>
+                        <div class="report-label">신용형태</div>
+                        <div class="report-status status-good">매우안정</div>
+                    </div>
+                    <div class="report-item">
+                        <div class="report-emoji">😊🎉</div>
+                        <div class="report-label">부채금액</div>
+                        <div class="report-status status-good">매우안정</div>
+                    </div>
+                    <div class="report-item">
+                        <div class="report-emoji">😊🎉</div>
+                        <div class="report-label">상환이력</div>
+                        <div class="report-status status-good">매우안정</div>
+                    </div>
+                </div>
+                <button class="detail-btn">상세 확인하기</button>
+            </div>
+
+            <div class="info-banner">
+                <div class="info-icon">🚨</div>
+                <div class="info-text">스트레스 DSR 3단계, 대출 한도 크게 줄어요</div>
+                <span style="color: #ccc;">›</span>
+            </div>
+
+            <div class="info-banner">
+                <div class="info-icon">🪙</div>
+                <div class="info-text">아낌+ 보금자리론, 카카오뱅크에서 편하게 받으세요</div>
+                <span style="color: #ccc;">›</span>
+            </div>
+        </div>
+
+        <div class="loan-recommend-section">
+            <div class="recommend-header">
+                <span class="recommend-title">오늘의 신용대출 추천상품</span>
+                <span class="ad-badge-small">AD</span>
+            </div>
+            <div class="recommend-subtitle">내 조건도 대출 가능할까?</div>
+            
+            <div class="recommend-card">
+                <div class="recommend-bank-icon">OK</div>
+                <div class="recommend-info">
+                    <div class="recommend-bank">OK저축은행</div>
+                    <div class="recommend-product">OK론</div>
+                    <div class="recommend-rate">연 6.54 ~ 19.9%</div>
+                    <div class="recommend-limit">최대 한도 1억원</div>
+                </div>
             </div>
         </div>
     </div>
