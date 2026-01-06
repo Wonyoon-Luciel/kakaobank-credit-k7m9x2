@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-    <title>카카오뱅크 - 내 신용정보</title>
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%23FFD900' width='100' height='100' rx='20'/><text x='50' y='70' text-anchor='middle' font-size='60' font-weight='bold'>B</text></svg>">
+    <title>카카오뱅크</title>
     <style>
         * {
             margin: 0;
@@ -24,32 +25,6 @@
             min-height: 100vh;
         }
 
-        /* 상태바 영역 */
-        .status-bar {
-            height: 54px;
-            padding: 0 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: #000;
-            font-size: 17px;
-            font-weight: 600;
-        }
-
-        .status-left {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .status-right {
-            display: flex;
-            align-items: center;
-            gap: 4px;
-            font-size: 15px;
-        }
-
-        /* 페이지별 공통 스타일 */
         .page {
             display: none;
             min-height: 100vh;
@@ -59,14 +34,14 @@
             display: block;
         }
 
-        /* 홈 화면 (화이트모드) */
+        /* 홈 화면 */
         .home-page {
             background: #fff;
             color: #000;
         }
 
         .home-header {
-            padding: 20px;
+            padding: 60px 20px 20px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -75,41 +50,35 @@
         .home-title {
             font-size: 28px;
             font-weight: 700;
-            display: flex;
-            align-items: center;
-            gap: 8px;
             color: #000;
         }
 
         .home-actions {
             display: flex;
-            gap: 12px;
-            align-items: center;
+            gap: 16px;
         }
 
         .icon-btn {
             background: none;
             border: none;
-            color: #000;
             font-size: 24px;
             cursor: pointer;
         }
 
         .search-bar {
             margin: 0 20px 24px;
-            padding: 14px 20px;
-            background: #f5f5f5;
-            border: 1px solid #e0e0e0;
-            border-radius: 24px;
-            color: #999;
-            font-size: 16px;
+            padding: 16px 20px;
+            background: #f8f8f8;
+            border-radius: 30px;
+            color: #888;
+            font-size: 15px;
         }
 
         .menu-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            padding: 0 20px 32px;
+            padding: 0 20px 24px;
         }
 
         .menu-item {
@@ -118,14 +87,13 @@
             align-items: center;
             gap: 8px;
             cursor: pointer;
-            position: relative;
         }
 
         .menu-icon {
             width: 56px;
             height: 56px;
             border-radius: 16px;
-            background: #f5f5f5;
+            background: #f8f8f8;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -133,12 +101,12 @@
             position: relative;
         }
 
-        .menu-icon .badge {
+        .badge {
             position: absolute;
-            top: -4px;
-            right: -4px;
-            width: 10px;
-            height: 10px;
+            top: -2px;
+            right: -2px;
+            width: 8px;
+            height: 8px;
             background: #ff5a5f;
             border-radius: 50%;
         }
@@ -148,15 +116,45 @@
             color: #000;
         }
 
+        .ad-banner {
+            background: #fff;
+            padding: 16px 20px;
+            margin: 0 20px 24px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+        }
+
+        .only-badge {
+            background: #ff0000;
+            color: #fff;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 12px;
+        }
+
+        .ad-text {
+            flex: 1;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .ad-label {
+            font-size: 12px;
+            color: #999;
+        }
+
         .section-title {
             padding: 0 20px 16px;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 700;
-            color: #000;
         }
 
         .ai-menu-list {
-            padding: 0 20px;
+            padding: 0 20px 100px;
         }
 
         .ai-menu-item {
@@ -187,7 +185,6 @@
         .ai-name {
             font-size: 16px;
             font-weight: 600;
-            color: #000;
         }
 
         .ai-badge {
@@ -207,18 +204,14 @@
             color: #999;
         }
 
-        /* 신용정보 화면 (라이트모드) */
-        .credit-page {
-            background: #fff;
-        }
-
+        /* 신용정보 화면 */
         .light-header {
             background: #fff;
-            padding: 0 20px;
-            height: 54px;
+            padding: 60px 20px 16px 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
+            position: relative;
         }
 
         .back-btn {
@@ -227,7 +220,6 @@
             font-size: 28px;
             cursor: pointer;
             padding: 0;
-            color: #000;
         }
 
         .header-title {
@@ -242,7 +234,6 @@
             display: flex;
             gap: 12px;
             padding: 24px 20px;
-            background: #fff;
         }
 
         .score-card {
@@ -294,7 +285,6 @@
             transform: translate(-50%, -50%);
             font-size: 44px;
             font-weight: 700;
-            line-height: 1;
         }
 
         .score-label {
@@ -312,16 +302,10 @@
         .score-change {
             font-size: 12px;
             color: #999;
-            font-weight: 500;
         }
 
-        .score-change .up {
-            color: #ff4444;
-        }
-
-        .score-change .down {
-            color: #4444ff;
-        }
+        .up { color: #ff4444; }
+        .down { color: #4444ff; }
 
         .credit-info-box {
             background: #fff;
@@ -339,7 +323,6 @@
         .info-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
             padding: 12px 0;
         }
 
@@ -367,9 +350,6 @@
 
         .refresh-section {
             padding: 20px;
-            background: #fff;
-            margin-top: 16px;
-            border-radius: 16px;
             margin: 16px 20px;
             display: flex;
             align-items: center;
@@ -411,7 +391,6 @@
             margin-bottom: 12px;
             display: flex;
             justify-content: space-between;
-            align-items: center;
             cursor: pointer;
         }
 
@@ -428,14 +407,9 @@
             gap: 8px;
         }
 
-        /* 상세 화면 공통 */
-        .detail-page {
-            background: #fff;
-        }
-
+        /* 상세 화면 */
         .tab-bar {
             display: flex;
-            background: #fff;
             border-bottom: 1px solid #e0e0e0;
         }
 
@@ -563,16 +537,10 @@
             cursor: pointer;
         }
 
-        /* 빈 상태 */
         .empty-state {
             text-align: center;
             padding: 80px 20px;
             color: #999;
-        }
-
-        .empty-message {
-            font-size: 15px;
-            margin-bottom: 60px;
         }
 
         .disclaimer {
@@ -583,26 +551,26 @@
             line-height: 1.6;
         }
 
-        .ad-section {
+        .loan-ad-section {
             background: #e3f2fd;
             padding: 20px;
             border-radius: 12px;
             margin: 20px;
         }
 
-        .ad-title {
+        .loan-ad-title {
             font-size: 16px;
             font-weight: 700;
             margin-bottom: 8px;
         }
 
-        .ad-subtitle {
+        .loan-ad-subtitle {
             font-size: 14px;
             color: #666;
             margin-bottom: 16px;
         }
 
-        .ad-card {
+        .loan-ad-card {
             background: #fff;
             padding: 16px;
             border-radius: 12px;
@@ -611,7 +579,7 @@
             gap: 12px;
         }
 
-        .ad-icon {
+        .loan-ad-icon {
             width: 48px;
             height: 48px;
             background: #5b4fff;
@@ -623,28 +591,28 @@
             font-size: 24px;
         }
 
-        .ad-info {
+        .loan-ad-info {
             flex: 1;
         }
 
-        .ad-bank {
+        .loan-ad-bank {
             font-size: 16px;
             font-weight: 700;
             margin-bottom: 4px;
         }
 
-        .ad-product {
+        .loan-ad-product {
             font-size: 13px;
             color: #666;
         }
 
-        .ad-rate {
+        .loan-ad-rate {
             font-size: 18px;
             font-weight: 700;
             text-align: right;
         }
 
-        .ad-limit {
+        .loan-ad-limit {
             font-size: 13px;
             color: #666;
             text-align: right;
@@ -666,16 +634,6 @@
             max-width: 390px;
         }
 
-        /* 애니메이션 */
-        .fade-in {
-            animation: fadeIn 0.3s ease;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
         .slide-in-right {
             animation: slideInRight 0.3s ease;
         }
@@ -689,31 +647,15 @@
 <body>
     <!-- 홈 화면 -->
     <div id="home" class="page home-page active">
-        <div class="status-bar">
-            <div class="status-left">
-                <span>20:54</span>
-                <span>🔇</span>
-            </div>
-            <div class="status-right">
-                <span>📶</span>
-                <span>5G</span>
-                <span>🔋37</span>
-            </div>
-        </div>
-
         <div class="home-header">
-            <div class="home-title">
-                머니 <span style="font-size: 20px;">›</span>
-            </div>
+            <div class="home-title">머니 ›</div>
             <div class="home-actions">
                 <button class="icon-btn">🔔</button>
                 <button class="icon-btn">⚙️</button>
             </div>
         </div>
 
-        <div class="search-bar">
-            🔍 AI에게 물어보세요
-        </div>
+        <div class="search-bar">🔍 AI에게 물어보세요</div>
 
         <div class="menu-grid">
             <div class="menu-item">
@@ -725,10 +667,7 @@
                 <div class="menu-label">내 카드</div>
             </div>
             <div class="menu-item">
-                <div class="menu-icon">
-                    📂
-                    <span class="badge"></span>
-                </div>
+                <div class="menu-icon">📂<span class="badge"></span></div>
                 <div class="menu-label">내 문서함</div>
             </div>
             <div class="menu-item">
@@ -744,19 +683,19 @@
                 <div class="menu-label">모바일 신분증</div>
             </div>
             <div class="menu-item">
-                <div class="menu-icon">
-                    📢
-                    <span class="badge"></span>
-                </div>
+                <div class="menu-icon">📢<span class="badge"></span></div>
                 <div class="menu-label">공지사항</div>
             </div>
             <div class="menu-item">
-                <div class="menu-icon">
-                    🔒
-                    <span class="badge"></span>
-                </div>
+                <div class="menu-icon">🔒<span class="badge"></span></div>
                 <div class="menu-label">인증/보안</div>
             </div>
+        </div>
+
+        <div class="ad-banner">
+            <span class="only-badge">ONLY</span>
+            <span class="ad-text">무료체험만해도 3만원 혜택 증정</span>
+            <span class="ad-label">· AD</span>
         </div>
 
         <div class="section-title">카카오뱅크 AI</div>
@@ -804,7 +743,7 @@
         <div class="light-header">
             <button class="back-btn" onclick="navigateTo('home')">✕</button>
             <div class="header-title">내 신용정보</div>
-            <button class="icon-btn" style="color: #000;">🔔</button>
+            <button class="icon-btn">🔔</button>
         </div>
 
         <div class="score-cards">
@@ -815,9 +754,7 @@
                     <div class="score-number">810</div>
                 </div>
                 <div class="score-label">KCB</div>
-                <div class="score-change">
-                    <span class="up">▲11점</span> 상위 57%
-                </div>
+                <div class="score-change"><span class="up">▲11점</span> 상위 57%</div>
             </div>
             <div class="score-card">
                 <div class="score-circle">
@@ -826,9 +763,7 @@
                     <div class="score-number">881</div>
                 </div>
                 <div class="score-label">NICE</div>
-                <div class="score-change">
-                    <span class="down">▼49점</span> 상위 52%
-                </div>
+                <div class="score-change"><span class="down">▼49점</span> 상위 52%</div>
             </div>
         </div>
 
@@ -851,17 +786,11 @@
             <div class="usage-title">내 신용 관리</div>
             <div class="usage-item" onclick="navigateTo('card')">
                 <span class="usage-label">카드 (11월)</span>
-                <span class="usage-value">
-                    4,706,000원
-                    <span style="color: #ccc;">›</span>
-                </span>
+                <span class="usage-value">4,706,000원 <span style="color: #ccc;">›</span></span>
             </div>
             <div class="usage-item" onclick="navigateTo('loan')">
                 <span class="usage-label">대출</span>
-                <span class="usage-value">
-                    2,967,000원
-                    <span style="color: #ccc;">›</span>
-                </span>
+                <span class="usage-value">2,967,000원 <span style="color: #ccc;">›</span></span>
             </div>
         </div>
     </div>
@@ -883,34 +812,11 @@
         <div class="detail-content">
             <div class="detail-subtitle">11월 카드 이용금액</div>
             <div class="detail-amount">4,706,000원</div>
-
             <div class="chart-container">
                 <div class="chart-label">4,706,000원</div>
                 <svg class="chart-svg" viewBox="0 0 350 180">
-                    <defs>
-                        <linearGradient id="lineGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" style="stop-color:#00c853;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#00c853;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    <!-- 배경 격자 -->
-                    <line x1="0" y1="180" x2="350" y2="180" stroke="#e0e0e0" stroke-width="1"/>
-                    
-                    <!-- 차트 라인 -->
-                    <polyline
-                        fill="none"
-                        stroke="url(#lineGradient)"
-                        stroke-width="3"
-                        stroke-dasharray="5,5"
-                        points="20,100 80,120 140,60 200,80 260,50 320,20"
-                    />
-                    
-                    <!-- 포인트 -->
-                    <circle cx="20" cy="100" r="5" fill="#00c853"/>
-                    <circle cx="140" cy="60" r="5" fill="#00c853"/>
+                    <polyline fill="none" stroke="#00c853" stroke-width="3" stroke-dasharray="5,5" points="20,100 80,120 140,60 200,80 260,50 320,20"/>
                     <circle cx="320" cy="20" r="8" fill="#00c853" stroke="#fff" stroke-width="2"/>
-                    
-                    <!-- X축 레이블 -->
                     <text x="20" y="200" text-anchor="middle" font-size="12" fill="#999">6</text>
                     <text x="80" y="200" text-anchor="middle" font-size="12" fill="#999">7</text>
                     <text x="140" y="200" text-anchor="middle" font-size="12" fill="#999">8</text>
@@ -924,7 +830,6 @@
 
         <div class="list-section">
             <div class="list-title">카드 총 8개</div>
-
             <div class="card-item">
                 <div class="card-icon" style="background: #5b4fff; color: #fff;">$</div>
                 <div class="card-info">
@@ -934,7 +839,6 @@
                 <div class="card-amount">0원</div>
                 <button class="expand-btn">∨</button>
             </div>
-
             <div class="card-item">
                 <div class="card-icon" style="background: #ffd700; color: #333;">★</div>
                 <div class="card-info">
@@ -944,7 +848,6 @@
                 <div class="card-amount">5,000원</div>
                 <button class="expand-btn">∨</button>
             </div>
-
             <div class="card-item">
                 <div class="card-icon" style="background: #00a8ff; color: #fff;">🌊</div>
                 <div class="card-info">
@@ -954,7 +857,6 @@
                 <div class="card-amount">2,064,000원</div>
                 <button class="expand-btn">∨</button>
             </div>
-
             <div class="card-item">
                 <div class="card-icon" style="background: #000; color: #fff;">H</div>
                 <div class="card-info">
@@ -962,16 +864,6 @@
                     <div class="card-type">신용</div>
                 </div>
                 <div class="card-amount">2,608,000원</div>
-                <button class="expand-btn">∨</button>
-            </div>
-
-            <div class="card-item">
-                <div class="card-icon" style="background: #ffd700; color: #333;">★</div>
-                <div class="card-info">
-                    <div class="card-name">KB국민카드</div>
-                    <div class="card-type">체크</div>
-                </div>
-                <div class="card-amount">0원</div>
                 <button class="expand-btn">∨</button>
             </div>
         </div>
@@ -994,35 +886,13 @@
         <div class="detail-content">
             <div class="detail-subtitle">남은 대출원금</div>
             <div class="detail-amount">2,967,000원</div>
-
             <div class="chart-container">
                 <div class="chart-label">2,967,000원</div>
                 <svg class="chart-svg" viewBox="0 0 350 180">
-                    <defs>
-                        <linearGradient id="loanGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                            <stop offset="0%" style="stop-color:#5b4fff;stop-opacity:1" />
-                            <stop offset="100%" style="stop-color:#5b4fff;stop-opacity:1" />
-                        </linearGradient>
-                    </defs>
-                    
-                    <!-- 차트 라인 -->
-                    <polyline
-                        fill="none"
-                        stroke="url(#loanGradient)"
-                        stroke-width="3"
-                        stroke-dasharray="5,5"
-                        points="20,160 80,155 140,150 200,120 260,60 320,20"
-                    />
-                    
-                    <!-- 포인트 -->
-                    <circle cx="140" cy="150" r="5" fill="#5b4fff"/>
+                    <polyline fill="none" stroke="#5b4fff" stroke-width="3" stroke-dasharray="5,5" points="20,160 80,155 140,150 200,120 260,60 320,20"/>
                     <circle cx="320" cy="20" r="8" fill="#5b4fff" stroke="#fff" stroke-width="2"/>
-                    
-                    <!-- X축 레이블 -->
                     <text x="20" y="200" text-anchor="middle" font-size="12" fill="#999">8</text>
-                    <text x="80" y="200" text-anchor="middle" font-size="12" fill="#999">9</text>
                     <text x="140" y="200" text-anchor="middle" font-size="12" fill="#999">10</text>
-                    <text x="200" y="200" text-anchor="middle" font-size="12" fill="#999">11</text>
                     <text x="260" y="200" text-anchor="middle" font-size="12" fill="#999">12</text>
                     <text x="320" y="200" text-anchor="middle" font-size="12" fill="#999">1월</text>
                 </svg>
@@ -1032,7 +902,6 @@
 
         <div class="list-section">
             <div class="list-title">대출 총 1건</div>
-
             <div class="card-item">
                 <div class="card-icon" style="background: #ffd900; color: #333;">B</div>
                 <div class="card-info">
@@ -1048,24 +917,23 @@
             위 정보는 코리아크레딧뷰로(KCB)에서 제공하며, KCB 데이터 산정일 및 기준 금액의 차이로 실제 금융정보와 다를 수 있습니다.
         </div>
 
-        <div class="ad-section">
-            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+        <div class="loan-ad-section">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
                 <div>
-                    <div class="ad-title">이미 대출이 있어도 신청 가능!</div>
-                    <div class="ad-subtitle">DSR 제한없이 모바일 당일대출 신청 가능</div>
+                    <div class="loan-ad-title">이미 대출이 있어도 신청 가능!</div>
+                    <div class="loan-ad-subtitle">DSR 제한없이 모바일 당일대출 신청 가능</div>
                 </div>
                 <span style="background: #fff; padding: 4px 8px; border-radius: 4px; font-size: 11px; color: #999;">AD</span>
             </div>
-
-            <div class="ad-card">
-                <div class="ad-icon">$</div>
-                <div class="ad-info">
-                    <div class="ad-bank">신한저축은행</div>
-                    <div class="ad-product">사잇돌2</div>
+            <div class="loan-ad-card">
+                <div class="loan-ad-icon">$</div>
+                <div class="loan-ad-info">
+                    <div class="loan-ad-bank">신한저축은행</div>
+                    <div class="loan-ad-product">사잇돌2</div>
                 </div>
                 <div>
-                    <div class="ad-rate">9.0~16.0%</div>
-                    <div class="ad-limit">최대 한도 3,000만원</div>
+                    <div class="loan-ad-rate">9.0~16.0%</div>
+                    <div class="loan-ad-limit">최대 한도 3,000만원</div>
                 </div>
                 <button class="expand-btn">›</button>
             </div>
@@ -1091,21 +959,17 @@
             <div class="detail-amount">0원</div>
         </div>
 
-        <div class="list-section" style="background: #f5f5f5; padding: 16px 20px;">
+        <div class="list-section">
             <div class="list-title">연체 총 0건</div>
         </div>
 
-        <div class="empty-state">
-            <div class="empty-message">현재 보유하고 계신 연체내역이 없습니다.</div>
-        </div>
+        <div class="empty-state">현재 보유하고 계신 연체내역이 없습니다.</div>
 
         <div class="disclaimer">
             위 정보는 코리아크레딧뷰로(KCB)에서 제공하며, KCB 데이터 산정일 및 기준 금액의 차이로 실제 금융정보와 다를 수 있습니다.
         </div>
 
-        <div class="bottom-notice">
-            <span>⚠️</span> 스크린 캡쳐가 감지되었습니다.
-        </div>
+        <div class="bottom-notice">⚠️ 스크린 캡쳐가 감지되었습니다.</div>
     </div>
 
     <!-- 보증 상세 화면 -->
@@ -1127,99 +991,46 @@
             <div class="detail-amount">0원</div>
         </div>
 
-        <div class="list-section" style="background: #f5f5f5; padding: 16px 20px;">
+        <div class="list-section">
             <div class="list-title">보증 총 0건</div>
         </div>
 
-        <div class="empty-state">
-            <div class="empty-message">현재 보유하고 계신 연대보증이 없습니다.</div>
-        </div>
+        <div class="empty-state">현재 보유하고 계신 연대보증이 없습니다.</div>
 
         <div class="disclaimer">
             위 정보는 코리아크레딧뷰로(KCB)에서 제공하며, KCB 데이터 산정일 및 기준 금액의 차이로 실제 금융정보와 다를 수 있습니다.
         </div>
 
-        <div class="bottom-notice">
-            <span>⚠️</span> 스크린 캡쳐가 감지되었습니다.
-        </div>
+        <div class="bottom-notice">⚠️ 스크린 캡쳐가 감지되었습니다.</div>
     </div>
 
     <script>
-        // URL 기반 라우팅 시스템
         function navigateTo(pageId) {
-            // URL 해시 업데이트
-            if (pageId === 'home') {
-                window.location.hash = '';
-            } else {
-                window.location.hash = pageId;
-            }
-            
-            // 페이지 전환
+            window.location.hash = pageId === 'home' ? '' : pageId;
             showPage(pageId);
         }
 
         function showPage(pageId) {
-            // 모든 페이지 숨기기
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // 선택된 페이지 표시
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                targetPage.classList.add('active');
-                targetPage.classList.add('slide-in-right');
-                
-                // 애니메이션 클래스 제거
-                setTimeout(() => {
-                    targetPage.classList.remove('slide-in-right');
-                }, 300);
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            const page = document.getElementById(pageId);
+            if (page) {
+                page.classList.add('active', 'slide-in-right');
+                setTimeout(() => page.classList.remove('slide-in-right'), 300);
             }
         }
 
-        // 페이지 로드 시 URL 해시 확인
-        function handleHashChange() {
-            const hash = window.location.hash.slice(1); // '#' 제거
-            const pageId = hash || 'home';
-            showPage(pageId);
-        }
-
-        // 이벤트 리스너
-        window.addEventListener('hashchange', handleHashChange);
-        window.addEventListener('load', handleHashChange);
-
-        // 뒤로가기 버튼 지원
-        window.addEventListener('popstate', handleHashChange);
-
-        // 터치 제스처 개선
-        document.querySelectorAll('.menu-item, .usage-item, .card-item, .tab').forEach(element => {
-            element.addEventListener('touchstart', function() {
-                this.style.opacity = '0.6';
-            });
-            
-            element.addEventListener('touchend', function() {
-                this.style.opacity = '1';
-            });
+        window.addEventListener('hashchange', () => {
+            showPage(window.location.hash.slice(1) || 'home');
         });
 
-        // URL 복사 기능 (선택사항)
-        function copyCurrentURL() {
-            const url = window.location.href;
-            navigator.clipboard.writeText(url).then(() => {
-                alert('URL이 복사되었습니다: ' + url);
-            });
-        }
+        window.addEventListener('load', () => {
+            showPage(window.location.hash.slice(1) || 'home');
+        });
 
-        // 콘솔에 네비게이션 가이드 출력
-        console.log('%c🏦 카카오뱅크 신용정보 프로토타입', 'font-size: 20px; font-weight: bold; color: #ffd900;');
-        console.log('%c📱 URL 네비게이션 활성화됨', 'font-size: 14px; color: #00c853;');
-        console.log('%c\n사용 가능한 URL:', 'font-size: 12px; font-weight: bold;');
-        console.log('- 홈: ' + window.location.origin + window.location.pathname);
-        console.log('- 신용정보: ' + window.location.origin + window.location.pathname + '#credit');
-        console.log('- 카드 상세: ' + window.location.origin + window.location.pathname + '#card');
-        console.log('- 대출 상세: ' + window.location.origin + window.location.pathname + '#loan');
-        console.log('- 연체 상세: ' + window.location.origin + window.location.pathname + '#overdue');
-        console.log('- 보증 상세: ' + window.location.origin + window.location.pathname + '#guarantee');
+        document.querySelectorAll('.menu-item, .usage-item, .card-item, .tab').forEach(el => {
+            el.addEventListener('touchstart', () => el.style.opacity = '0.6');
+            el.addEventListener('touchend', () => el.style.opacity = '1');
+        });
     </script>
 </body>
 </html>
