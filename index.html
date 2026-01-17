@@ -1131,22 +1131,36 @@
         </div>
 
         <div class="detail-content">
-            <div class="detail-subtitle">11월 카드 이용금액</div>
-            <div class="detail-amount">1,706,000원</div>
+            <div class="detail-subtitle">12월 카드 이용금액</div>
+            <div class="detail-amount">897,000원</div>
             <div class="chart-container">
-                <div class="chart-label">1,706,000원</div>
+                <div class="chart-label">897,000원</div>
                 <svg class="chart-svg" viewBox="0 0 400 200">
                     <line x1="0" y1="140" x2="400" y2="140" stroke="#f0f0f0" stroke-width="1"/>
-                    <polyline fill="none" stroke="#00c853" stroke-width="3" stroke-dasharray="8,5" points="30,80 100,110 170,45 240,60 310,35 380,15"/>
+                    <path
+                        d="
+                          M 30 80
+                          C 60 80, 80 110, 100 110
+                          C 130 110, 150 45, 170 45
+                          C 200 45, 220 60, 240 60
+                          C 270 60, 290 35, 310 35
+                          C 340 35, 360 15, 380 15
+                        "
+                        fill="none"
+                        stroke="#00c853"
+                        stroke-width="4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                    />
                     <circle cx="30" cy="80" r="5" fill="#00c853"/>
                     <circle cx="240" cy="60" r="5" fill="#00c853"/>
                     <circle cx="380" cy="15" r="9" fill="#00c853" stroke="#fff" stroke-width="3"/>
-                    <text x="30" y="170" text-anchor="middle" font-size="14" fill="#999">6</text>
-                    <text x="100" y="170" text-anchor="middle" font-size="14" fill="#999">7</text>
-                    <text x="170" y="170" text-anchor="middle" font-size="14" fill="#999">8</text>
-                    <text x="240" y="170" text-anchor="middle" font-size="14" fill="#999">9</text>
-                    <text x="310" y="170" text-anchor="middle" font-size="14" fill="#999">10</text>
-                    <text x="380" y="170" text-anchor="middle" font-size="14" fill="#999" font-weight="600">11월</text>
+                    <text x="30" y="170" text-anchor="middle" font-size="14" fill="#999">7</text>
+                    <text x="100" y="170" text-anchor="middle" font-size="14" fill="#999">8</text>
+                    <text x="170" y="170" text-anchor="middle" font-size="14" fill="#999">9</text>
+                    <text x="240" y="170" text-anchor="middle" font-size="14" fill="#999">10</text>
+                    <text x="310" y="170" text-anchor="middle" font-size="14" fill="#999">11</text>
+                    <text x="380" y="170" text-anchor="middle" font-size="14" fill="#999" font-weight="600">12월</text>
                 </svg>
             </div>
             <div class="chart-info">15일 이전은 전전월말 / 15일 이후는 전월말 기준</div>
@@ -1221,7 +1235,7 @@
                         <div class="card-type">신용</div>
                     </div>
                     <div class="card-amount-wrapper">
-                        <div class="card-amount">5,000원</div>
+                        <div class="card-amount">0원</div>
                         <button class="expand-btn-inline">∨</button>
                     </div>
                 </div>
@@ -1232,7 +1246,7 @@
                     </div>
                     <div class="detail-row">
                         <span class="detail-label">신용 일시불 이용금액</span>
-                        <span class="detail-value">5,000원</span>
+                        <span class="detail-value">0원</span>
                     </div>
                     <div class="detail-row">
                         <span class="detail-label">신용 할부 이용금액</span>
@@ -1252,7 +1266,7 @@
                     </div>
                     <div class="detail-row">
                         <span class="detail-label">총 이용금액</span>
-                        <span class="detail-value">5,000원</span>
+                        <span class="detail-value">0원</span>
                     </div>
                     <div class="detail-row">
                         <span class="detail-label">총 한도</span>
