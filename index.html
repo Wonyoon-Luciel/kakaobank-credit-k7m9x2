@@ -628,16 +628,15 @@
 
         .chart-label {
             position: absolute;
-            top: -30px;
-            right: 0;
             background: #333;
             color: #fff;
             padding: 6px 12px;
             border-radius: 8px;
             font-size: 13px;
-            font-weight: 600;
+            white-space: nowrap;
+            transform: translate(-50%, -100%);
         }
-
+        
         .chart-svg {
             width: 100%;
             height: 100%;
@@ -1144,7 +1143,7 @@
                         stroke="#009846"
                         stroke-width="4"
                         stroke-dasharray="8,5"
-                        points="30,90 100,90 170,65 240,55 310,40"
+                        points="30,90 100,90 310,40"
                     />
                     <!-- 11~12월 실선 -->
                     <polyline
@@ -1755,6 +1754,28 @@
             el.addEventListener('touchstart', () => el.style.opacity = '0.6');
             el.addEventListener('touchend', () => el.style.opacity = '1');
         });
+    </script>
+    <script>
+        window.addEventListener('load', () => {
+        const container = document.querySelector('.chart-container');
+        const label = container.querySelector('.chart-label');
+        const svg = container.querySelector('.chart-svg');
+
+        if (!label || !svg) return;
+
+        const svgRect = svg.getBoundingClientRect();
+        const containerRect = container.getBoundingClientRect();
+
+        // 12월 점 좌표 (SVG 기준)
+        const cx = 380;
+        const cy = 125;
+
+        const x = (cx / 400) * svgRect.width;
+        const y = (cy / 200) * svgRect.height;
+
+        label.style.left = `${x}px`;
+        label.style.top  = `${y}px`;
+    });
     </script>
 </body>
 </html>
